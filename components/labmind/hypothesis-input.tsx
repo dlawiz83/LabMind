@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { FlaskConical, Dna, Stethoscope } from "lucide-react"
+import { FlaskConical, Dna, Stethoscope, Brain } from "lucide-react"
 
 const EXAMPLES = [
   {
@@ -18,6 +18,11 @@ const EXAMPLES = [
     label: "Diagnostics",
     Icon: Stethoscope,
     text: "A paper-based electrochemical biosensor functionalized with anti-CRP antibodies will detect C-reactive protein in whole blood at concentrations below 0.5 mg/L within 10 minutes, matching laboratory ELISA sensitivity without requiring sample preprocessing.",
+  },
+  {
+    label: "Neuroscience",
+    Icon: Brain,
+    text: "CRISPR-Cas9-mediated knockout of the APOE4 allele in iPSC-derived neurons will reduce amyloid-beta 1-42 secretion by at least 40% relative to isogenic APOE4 controls within 72 hours, as quantified by sandwich ELISA, implicating APOE4 in amyloidogenic processing independent of tau pathology.",
   },
 ]
 
