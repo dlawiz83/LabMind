@@ -3,7 +3,9 @@
 import type { TabId } from "./tab-bar"
 
 // Inline text renderer: handles **bold**, [Source:...], [VERIFY]
-function InlineText({ text }: { text: string }) {
+// verifyQuery: if provided, [VERIFY] becomes a clickable search link using that query.
+//              if absent, [VERIFY] is rendered as a plain styled span (no link).
+function InlineText({ text, verifyQuery }: { text: string; verifyQuery?: string }) {
   const TOKEN = /(\*\*[^*]+\*\*|\[Source:[^\]]+\]|\[VERIFY\])/g
   const parts: React.ReactNode[] = []
   let lastIdx = 0
@@ -16,10 +18,9 @@ function InlineText({ text }: { text: string }) {
       parts.push(<strong key={match.index} className="font-medium text-foreground">{token.slice(2, -2)}</strong>)
     } else if (token.startsWith("[Source:")) {
       parts.push(<span key={match.index} className="text-primary font-mono text-xs">{token}</span>)
-    } else {
-      // [VERIFY] — build a search query from the text preceding this tag
-      const query = text.slice(0, match.index).replace(/\*\*/g, "").replace(/\[Source:[^\]]+\]/g, "").trim()
-      const href = `https://www.google.com/search?q=${encodeURIComponent(query || "laboratory supplier")}`
+    } else if (verifyQuery !== undefined) {
+      // [VERIFY] in a materials table cell — link to supplier/catalog search
+      const href = `https://www.google.com/search?q=${encodeURIComponent(verifyQuery)}`
       parts.push(
         <a
           key={match.index}
@@ -30,6 +31,11 @@ function InlineText({ text }: { text: string }) {
         >
           {token}
         </a>
+      )
+    } else {
+      // [VERIFY] in paragraph/list — plain styled tag, not a link
+      parts.push(
+        <span key={match.index} className="text-amber-600 font-mono text-sm">[VERIFY]</span>
       )
     }
     lastIdx = match.index + token.length
@@ -82,6 +88,13 @@ function MarkdownSection({ text }: { text: string }) {
   const flushTable = () => {
     if (!tableRows.length) return
     const [header, ...rows] = tableRows
+
+    // Detect materials table and find which columns should have clickable [VERIFY]
+    const supplierIdx = header.findIndex(h => /supplier/i.test(h))
+    const catalogIdx = header.findIndex(h => /catalog/i.test(h))
+    const verifyColIdxs = new Set([supplierIdx, catalogIdx].filter(i => i >= 0))
+    const isMaterialsTable = verifyColIdxs.size > 0
+
     elements.push(
       <div key={key++} className="overflow-x-auto my-3">
         <table className="w-full border-collapse text-xs">
@@ -95,15 +108,24 @@ function MarkdownSection({ text }: { text: string }) {
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, i) => (
-              <tr key={i} className="border-b border-border">
-                {row.map((cell, j) => (
-                  <td key={j} className="py-2 pr-6 font-serif text-xs text-gray-600 align-top">
-                    <InlineText text={cell} />
-                  </td>
-                ))}
-              </tr>
-            ))}
+            {rows.map((row, i) => {
+              const itemName = row[0]?.replace(/\[VERIFY\]/g, "").replace(/\*\*/g, "").trim() ?? ""
+              const supplierName = supplierIdx >= 0 ? row[supplierIdx]?.replace(/\[VERIFY\]/g, "").replace(/\*\*/g, "").trim() ?? "" : ""
+              return (
+                <tr key={i} className="border-b border-border">
+                  {row.map((cell, j) => {
+                    const verifyQuery = isMaterialsTable && verifyColIdxs.has(j)
+                      ? `${itemName} ${supplierName} catalog`.trim()
+                      : undefined
+                    return (
+                      <td key={j} className="py-2 pr-6 font-serif text-xs text-gray-600 align-top">
+                        <InlineText text={cell} verifyQuery={verifyQuery} />
+                      </td>
+                    )
+                  })}
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>

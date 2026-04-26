@@ -50,7 +50,7 @@ export function ProvenancePanel({ selectedStep, references, isOpen, onClose }: P
       .replace(/\*\*/g, "")
       .trim()
 
-    const rationale = firstTwoSentences(cleanBody) || fallbackBody
+    const rationale = firstTwoSentences(cleanBody) || fallbackBody || selectedStep.content
     const paddedNumber = selectedStep.number.padStart(2, "0")
     const firstSource = sources[0] ?? null
 
@@ -133,10 +133,11 @@ export function ProvenancePanel({ selectedStep, references, isOpen, onClose }: P
                   <p className="font-serif text-sm text-foreground leading-snug mb-1">
                     {ref.doi ? (
                       <a
-                        href={`https://doi.org/${ref.doi}`}
+                        href={ref.doi}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:text-primary transition-colors"
+                        className="hover:underline transition-colors"
+                        style={{ color: "#00875A" }}
                       >
                         {ref.title}
                       </a>

@@ -78,7 +78,7 @@ export function LiteratureStatus({ signal, references, isLoading }: LiteratureSt
           {references.slice(0, 3).map((ref, index) => (
             <p key={index} className="font-serif text-xs text-gray-600 leading-snug">
               <span className="text-gray-400 font-mono">{ref.authors} ({ref.year}). </span>
-              {ref.doi?.startsWith("http") ? (
+              {ref.doi ? (
                 <a
                   href={ref.doi}
                   target="_blank"
@@ -90,7 +90,7 @@ export function LiteratureStatus({ signal, references, isLoading }: LiteratureSt
               ) : (
                 <span>{ref.title}</span>
               )}
-              {ref.doi?.startsWith("http") && (
+              {ref.doi && (
                 <a
                   href={ref.doi}
                   target="_blank"
