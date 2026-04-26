@@ -14,7 +14,7 @@ Scientists lose 7 to 10 days on experiment planning before a single pipette tip 
 
 ## The Solution
 
-LabMind accepts a precisely stated scientific hypothesis and, within seconds, produces a complete, structured experiment plan: literature-grounded protocol steps with numbered source citations, a supplier-resolved materials table flagged for items requiring manual catalog verification, a costed budget with institutional overhead, a phase-gated timeline, a validation framework with statistical controls, and a biosafety classification — all exportable to PDF. Every claim is traced to a real literature source retrieved at query time. Nothing is fabricated.
+LabMind accepts a precisely stated scientific hypothesis and, in under 60 seconds, produces a complete, structured experiment plan: literature-grounded protocol steps with numbered source citations, a supplier-resolved materials table flagged for items requiring manual catalog verification, a costed budget with institutional overhead, a phase-gated timeline, a validation framework with statistical controls, and a biosafety classification — all exportable to PDF. Every claim is traced to a real literature source retrieved at query time. Nothing is fabricated.
 
 ```mermaid
 flowchart LR
@@ -140,7 +140,7 @@ The result is a planning assistant that becomes more accurate the more a researc
 
 ```bash
 git clone https://github.com/dlawiz83/LabMind.git
-cd labmind
+cd LabMind
 npm install
 cp .env.example .env.local
 npm run dev
