@@ -1,0 +1,290 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* LabMind Color Palette - Scientific & Editorial */
+  --background: #FFFFFF;
+  --foreground: #0D0D0D;
+  --card: #FFFFFF;
+  --card-foreground: #0D0D0D;
+  --popover: #FFFFFF;
+  --popover-foreground: #0D0D0D;
+  --primary: #00875A;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F5F5F5;
+  --secondary-foreground: #0D0D0D;
+  --muted: #F5F5F5;
+  --muted-foreground: #6B6B6B;
+  --accent: #00875A;
+  --accent-foreground: #FFFFFF;
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --border: #E5E5E5;
+  --input: #E5E5E5;
+  --ring: #00875A;
+  --radius: 0.25rem;
+  
+  /* Status Colors */
+  --status-novel: #00875A;
+  --status-similar: #D97706;
+  --status-exact: #DC2626;
+  
+  /* Neutral Grays */
+  --gray-50: #FAFAFA;
+  --gray-100: #F5F5F5;
+  --gray-200: #E5E5E5;
+  --gray-300: #D4D4D4;
+  --gray-400: #A3A3A3;
+  --gray-500: #737373;
+  --gray-600: #525252;
+  --gray-700: #404040;
+  --gray-800: #262626;
+  --gray-900: #171717;
+}
+
+@theme inline {
+  --font-sans: var(--font-dm-sans), 'DM Sans', system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), 'Source Serif 4', Georgia, serif;
+  --font-mono: var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Status Colors */
+  --color-status-novel: var(--status-novel);
+  --color-status-similar: var(--status-similar);
+  --color-status-exact: var(--status-exact);
+  
+  /* Grays */
+  --color-gray-50: var(--gray-50);
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+  --color-gray-600: var(--gray-600);
+  --color-gray-700: var(--gray-700);
+  --color-gray-800: var(--gray-800);
+  --color-gray-900: var(--gray-900);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@media print {
+  @page {
+    margin: 2.5cm;
+    size: A4;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Keep print output document-like and hide all interactive UI */
+  .print\:hidden,
+  nav,
+  button[title="Correct this step"] {
+    display: none !important;
+  }
+
+  .print\:block {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: #000 !important;
+  }
+
+  /* 1. Header */
+  .print\:block > div:first-child {
+    border-bottom: 1px solid #d1d5db;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .print\:block > div:first-child > h1 {
+    margin: 0 0 0.45rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 21pt !important;
+    font-weight: 700 !important;
+    color: #000 !important;
+  }
+
+  .print\:block > div:first-child > h1::before {
+    content: "LabMind Experiment Plan";
+    display: block;
+  }
+
+  .print\:block > div:first-child > h1 {
+    color: transparent !important;
+    position: relative;
+  }
+
+  .print\:block > div:first-child > h1::after {
+    content: "Date generated: 2026-04-26";
+    display: block;
+    margin-top: 0.2rem;
+    color: #374151;
+    font-size: 9.5pt;
+    font-weight: 400;
+  }
+
+  /* 2. Hypothesis block */
+  .print\:block > div:first-child > .pl-4 {
+    border-left: 2px solid #15803d !important;
+    padding-left: 0.9rem !important;
+    margin-top: 0.6rem !important;
+  }
+
+  .print\:block > div:first-child > .pl-4::before {
+    content: "HYPOTHESIS";
+    display: block;
+    margin-bottom: 0.2rem;
+    color: #111827;
+    font-size: 8.5pt;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+  }
+
+  .print\:block > div:first-child > .pl-4 p {
+    color: #111827 !important;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-style: italic !important;
+  }
+
+  /* 3. Literature QC */
+  .print\:block > div:first-child > p {
+    margin-top: 0.8rem !important;
+    padding-top: 0.6rem;
+    border-top: 1px solid #e5e7eb;
+    color: #111827 !important;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 10pt !important;
+    white-space: pre-wrap;
+  }
+
+  .print\:block > div:first-child > p::before {
+    content: "LITERATURE QC";
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* 4-8. Main sections */
+  .print\:block > div.border-t {
+    border-top: 0 !important;
+    padding-top: 0 !important;
+    margin-top: 1.1rem;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print\:block > div.border-t > h2 {
+    margin: 0 0 0.45rem;
+    color: #000 !important;
+    font-size: 11pt !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .print\:block > div.border-t > pre {
+    margin: 0;
+    white-space: pre-wrap !important;
+    word-break: break-word;
+    color: #111827 !important;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 10pt !important;
+    line-height: 1.5;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Render any markdown tables as proper printed tables */
+  .print\:block table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.4rem 0 0.7rem;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print\:block th,
+  .print\:block td {
+    border: 1px solid #9ca3af;
+    padding: 0.35rem 0.45rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .print\:block th {
+    background: #f9fafb !important;
+    font-weight: 700;
+  }
+
+  /* Catalog numbers in monospace */
+  .print\:block th:nth-child(3),
+  .print\:block td:nth-child(3) {
+    font-family: "IBM Plex Mono", "Courier New", monospace !important;
+  }
+
+  /* Keep [VERIFY] tags plain text in print */
+  .print\:block a[href*="google.com/search"] {
+    color: #111827 !important;
+    text-decoration: none !important;
+    pointer-events: none;
+  }
+
+  /* 9. Footer */
+  body::after {
+    content: "Generated by LabMind • 2026-04-26    Page " counter(page);
+    position: fixed;
+    left: 2.5cm;
+    right: 2.5cm;
+    bottom: 0.9cm;
+    border-top: 1px solid #d1d5db;
+    padding-top: 0.2rem;
+    color: #4b5563;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 9pt;
+    text-align: right;
+  }
+}
