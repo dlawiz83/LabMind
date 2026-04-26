@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 import { TopBar } from "@/components/labmind/top-bar"
 import { HypothesisInput } from "@/components/labmind/hypothesis-input"
 import { LiteratureStatus } from "@/components/labmind/literature-status"
@@ -269,9 +271,12 @@ export default function LabMindPage() {
                     <h2 className="font-sans text-base font-semibold text-foreground mb-3">
                       {TAB_LABELS[tab]}
                     </h2>
-                    <pre className="font-serif text-xs text-gray-600 whitespace-pre-wrap leading-relaxed">
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      className="font-serif text-xs text-gray-600 leading-relaxed"
+                    >
                       {content}
-                    </pre>
+                    </ReactMarkdown>
                   </div>
                 )
               })}
