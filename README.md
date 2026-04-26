@@ -1,6 +1,6 @@
 # LabMind
 
-**From hypothesis to runnable experiment plan in 7 minutes — sourced, costed, and biosafety-screened.**
+**From hypothesis to runnable experiment plan under 60 seconds — sourced, costed, and biosafety-screened.**
 
 ![Next.js](https://img.shields.io/badge/Next.js_14-black?style=flat-square&logo=next.js) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Groq](https://img.shields.io/badge/Groq-F55036?style=flat-square) ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-black?style=flat-square&logo=vercel)
 
