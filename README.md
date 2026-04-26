@@ -1,6 +1,6 @@
 # LabMind
 
-**From hypothesis to runnable experiment plan under 60 seconds — sourced, costed, and biosafety-screened.**
+**Turns a hypothesis into a runnable experiment plan in under 60 seconds — complete with sourcing, cost estimates, and biosafety screening.**
 
 ![Next.js](https://img.shields.io/badge/Next.js_14-black?style=flat-square&logo=next.js) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Groq](https://img.shields.io/badge/Groq-F55036?style=flat-square) ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-black?style=flat-square&logo=vercel)
 
