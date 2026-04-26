@@ -78,9 +78,9 @@ export function LiteratureStatus({ signal, references, isLoading }: LiteratureSt
           {references.slice(0, 3).map((ref, index) => (
             <p key={index} className="font-serif text-xs text-gray-600 leading-snug">
               <span className="text-gray-400 font-mono">{ref.authors} ({ref.year}). </span>
-              {ref.doi ? (
+              {ref.doi?.startsWith("http") ? (
                 <a
-                  href={`https://doi.org/${ref.doi}`}
+                  href={ref.doi}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-700 hover:text-primary hover:underline transition-colors"
@@ -90,14 +90,14 @@ export function LiteratureStatus({ signal, references, isLoading }: LiteratureSt
               ) : (
                 <span>{ref.title}</span>
               )}
-              {ref.doi && (
+              {ref.doi?.startsWith("http") && (
                 <a
-                  href={`https://doi.org/${ref.doi}`}
+                  href={ref.doi}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ml-2 font-mono text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded hover:bg-primary/20 transition-colors"
                 >
-                  DOI ↗
+                  View Paper ↗
                 </a>
               )}
             </p>

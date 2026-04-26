@@ -44,7 +44,13 @@ export function ProvenancePanel({ selectedStep, references, isOpen, onClose }: P
       .join(" ")
       .trim()
 
-    const rationale = firstTwoSentences(cleanBody)
+    const fallbackBody = selectedStep.content
+      .replace(/\[Source:[^\]]+\]/g, "")
+      .replace(/\[VERIFY\]/g, "")
+      .replace(/\*\*/g, "")
+      .trim()
+
+    const rationale = firstTwoSentences(cleanBody) || fallbackBody
     const paddedNumber = selectedStep.number.padStart(2, "0")
     const firstSource = sources[0] ?? null
 
@@ -80,13 +86,7 @@ export function ProvenancePanel({ selectedStep, references, isOpen, onClose }: P
           <h3 className="font-mono text-xs text-gray-500 uppercase tracking-wide mb-2">
             Rationale
           </h3>
-          {rationale ? (
-            <p className="font-serif text-sm text-gray-600 leading-relaxed">{rationale}</p>
-          ) : (
-            <p className="font-serif text-sm text-gray-400 italic">
-              No rationale available for this step.
-            </p>
-          )}
+          <p className="font-serif text-sm text-gray-600 leading-relaxed">{rationale}</p>
         </div>
 
         {sources.length > 0 && (

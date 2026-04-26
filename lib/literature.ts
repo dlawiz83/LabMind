@@ -19,7 +19,7 @@ export async function searchLiterature(hypothesis: string): Promise<LiteraturePa
     title: r.title ?? "Untitled",
     authors: r.author ?? "",
     year: r.published_date ? String(r.published_date).slice(0, 4) : "",
-    doi: r.url?.includes("doi.org") ? r.url.replace(/^https?:\/\/doi\.org\//, "") : "",
+    doi: r.url ?? "",
     abstract: r.content ?? "",
   }));
 }
